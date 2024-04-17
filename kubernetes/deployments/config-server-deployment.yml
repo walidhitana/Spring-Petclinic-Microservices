@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: spring-petclinic
+  labels:
+    app: config-server
+  name: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      containers:
+        - image: caninho/config-server
+          name: config-server
+          ports:
+            - containerPort: 8888
+          resources:
+            limits:
+              memory: "536870912"
+      restartPolicy: Always
